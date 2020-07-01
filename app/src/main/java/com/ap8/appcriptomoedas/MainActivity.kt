@@ -1,11 +1,7 @@
 package com.ap8.appcriptomoedas
 
-import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,9 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.ap8.appcriptomoedas.api.DadosAPI
-import com.ap8.appcriptomoedas.api.DadosAPIHTTP
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 

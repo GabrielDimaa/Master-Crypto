@@ -1,6 +1,6 @@
 package com.ap8.appcriptomoedas.api
 
-class DadosAPI (
+class MoedaAPI (
     var high: Double = 0.0, //Maior preço unitário de negociação das últimas 24 horas.
     var low: Double = 0.0, //Menor preço unitário de negociação das últimas 24 horas.
     var vol: Double = 0.0, //Quantidade negociada nas últimas 24 horas.

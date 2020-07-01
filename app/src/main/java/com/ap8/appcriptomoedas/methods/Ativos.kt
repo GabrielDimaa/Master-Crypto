@@ -1,4 +1,4 @@
-package com.ap8.appcriptomoedas.dao
+package com.ap8.appcriptomoedas.methods
 
 import android.os.Parcel
 import android.os.Parcelable

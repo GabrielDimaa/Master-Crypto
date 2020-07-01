@@ -1,31 +1,40 @@
 package com.ap8.appcriptomoedas
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ap8.appcriptomoedas.dao.Ativos
+import com.ap8.appcriptomoedas.methods.Ativos
+import com.ap8.appcriptomoedas.ui.AtivosOp
 import kotlinx.android.synthetic.main.adapter_ativos.view.*
 
 class AtivosAdapter(private val ativos: List<Ativos>):
     RecyclerView.Adapter<AtivosAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AtivosAdapter.VH {
-        val vh = LayoutInflater
+        val view = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.fragment_bitcoin, parent,false)
+            .inflate(R.layout.adapter_ativos, parent,false)
 
-        val vh_ = VH(vh)
+        val vHolder = VH(view)
 
-//        vh_.itemView.setOnClickListener{
-//            val produto= compras[vh.adapterPosition]
-//            val intencao = Intent(parent.context, UpdateActivity::class.java)
-//            intencao.putExtra("compra", produto)
-//            parent.context.startActivity(intencao)
-//        }
+        view.setOnClickListener(View.OnClickListener {
+            val ativo = Ativos(
+                vHolder.idInvisible,
+                vHolder.viewMoeda.text.toString(),
+                vHolder.viewQuantidade.text.toString().toDouble(),
+                vHolder.viewValor.text.toString().toDouble(),
+                vHolder.viewData.text.toString()
+            )
 
-        return vh_
+            val it = Intent(parent.context, AtivosOp::class.java)
+            it.putExtra("put/del", ativo)
+            parent.context.startActivity(it)
+        })
+
+        return vHolder
     }
 
     override fun getItemCount(): Int {
@@ -34,16 +43,18 @@ class AtivosAdapter(private val ativos: List<Ativos>):
 
     override fun onBindViewHolder(holder: AtivosAdapter.VH, position: Int) {
         val ativo = ativos[position]
-        holder.viewMoeda?.text = ativo.moeda
-        holder.viewQuantidade?.text = ativo.quantidade.toString()
-        holder.viewValor?.text = ativo.valor.toString()
-        holder.viewData?.text = ativo.data
+        holder.idInvisible = ativo.id
+        holder.viewMoeda.text = ativo.moeda.toString()
+        holder.viewQuantidade.text = ativo.quantidade.toString()
+        holder.viewValor.text = ativo.valor.toString()
+        holder.viewData.text = ativo.data.toString()
     }
 
     class VH(item: View): RecyclerView.ViewHolder(item) {
-        var viewMoeda: TextView? = item.viewMoeda_
-        var viewQuantidade: TextView? = item.viewQuantidade_
-        var viewValor: TextView? = item.viewValor_
-        var viewData: TextView? = item.viewData_
+        var idInvisible: Int? = null
+        var viewMoeda: TextView = item.viewMoeda_
+        var viewQuantidade: TextView = item.viewQuantidade_
+        var viewValor: TextView = item.viewValor_
+        var viewData: TextView = item.viewData_
     }
 }

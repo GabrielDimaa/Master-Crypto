@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.bitcoin.BitcoinSave"
+            android:name=".ui.AtivosOp"
             android:label="Teste" />
     </application>
 

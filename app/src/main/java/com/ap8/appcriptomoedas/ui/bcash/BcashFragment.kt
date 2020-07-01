@@ -1,5 +1,6 @@
 package com.ap8.appcriptomoedas.ui.bcash
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,24 +9,66 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ap8.appcriptomoedas.AtivosAdapter
 import com.ap8.appcriptomoedas.R
+import com.ap8.appcriptomoedas.methods.Ativos
+import com.ap8.appcriptomoedas.methods.AtivosMethods
+import com.ap8.appcriptomoedas.ui.AtivosOp
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_bcash.*
+import kotlinx.android.synthetic.main.fragment_bitcoin.*
 
 class BcashFragment : Fragment() {
 
-    private lateinit var bcashViewModel: BcashViewModel
+    var listaAtivos = mutableListOf<Ativos>()
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        bcashViewModel =
-                ViewModelProviders.of(this).get(BcashViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_bcash, container, false)
-        val textView: TextView = root.findViewById(R.id.text_bhc)
-        bcashViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+        val btn: FloatingActionButton = root.findViewById(R.id.buttonFloating)
+        val recycle: RecyclerView = root.findViewById(R.id.recycle_bcash)
+
+        btn.setOnClickListener(View.OnClickListener {
+            val it = Intent(activity, AtivosOp::class.java)
+            it.putExtra("moeda", "BHC")
+            activity?.startActivity(it)
         })
+
+        initRecyclerView(recycle)
         return root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        updateAdapter()
+    }
+
+    private fun updateAdapter() {
+        val methods = activity?.let { AtivosMethods(it) }
+        listaAtivos.clear()
+        if (methods != null) {
+            listaAtivos = methods.getBymoeda("BHC")
+        }
+        if(listaAtivos.isEmpty()) {
+            recycle_bcash.visibility = View.GONE
+            recycle_bcash.visibility = View.VISIBLE
+        } else {
+            recycle_bcash.visibility = View.VISIBLE
+        }
+        recycle_bcash.adapter = AtivosAdapter(listaAtivos)
+        recycle_bcash.adapter?.notifyDataSetChanged()
+    }
+
+    private fun initRecyclerView(recycle: RecyclerView) {
+        val adapter_ = AtivosAdapter(listaAtivos)
+        val layout = LinearLayoutManager(activity)
+        recycle.setHasFixedSize(true)
+        recycle.adapter = adapter_
+        recycle.layoutManager = layout
     }
 }

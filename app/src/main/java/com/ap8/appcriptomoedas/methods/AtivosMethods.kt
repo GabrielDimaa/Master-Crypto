@@ -1,22 +1,23 @@
-package com.ap8.appcriptomoedas.dao
+package com.ap8.appcriptomoedas.methods
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import com.ap8.appcriptomoedas.db.*
 
-class AtivosDao(context: Context) {
+class AtivosMethods(context: Context) {
     var db_ = DbHelper(context)
 
-    fun insert(ativos: Ativos): String {
+    fun insert(ativo: Ativos): String {
         val db = db_.writableDatabase
         val values = ContentValues()
-        values.put(MOEDA, ativos.moeda)
-        values.put(QUANTIDADE, ativos.quantidade)
-        values.put(VALOR, ativos.valor)
-        values.put(DATA, ativos.data)
+        values.put(MOEDA, ativo.moeda)
+        values.put(QUANTIDADE, ativo.quantidade)
+        values.put(VALOR, ativo.valor)
+        values.put(DATA, ativo.data)
 
-        val resp = db.insert(TABLE_ATIVO, null, values)
+        val resp = db.insert(TABLE_ATIVOS, null, values)
         val msg = if(resp != -1L) {
             "Inserido com sucesso"
         } else {
@@ -27,16 +28,30 @@ class AtivosDao(context: Context) {
         return msg
     }
 
+    fun update(ativo: Ativos): Boolean {
+        val db = db_.writableDatabase
+        val values = ContentValues()
+        values.put(ID, ativo.id)
+        values.put(MOEDA, ativo.moeda)
+        values.put(QUANTIDADE, ativo.quantidade)
+        values.put(VALOR, ativo.valor)
+        values.put(DATA, ativo.data)
+        db.insertWithOnConflict(TABLE_ATIVOS,null, values, SQLiteDatabase.CONFLICT_REPLACE)
+
+        db.close()
+        return true
+    }
+
     // fun update
 
-    fun remove(ativos: Ativos): Int {
-        val db = db_.writableDatabase
-        return db.delete(TABLE_ATIVO, "ID = ?", arrayOf(ativos.id.toString()))
-    }
+//    fun remove(ativos: Ativos): Int {
+//        val db = db_.writableDatabase
+//        return db.delete(TABLE_ATIVO, "ID = ?", arrayOf(ativos.id.toString()))
+//    }
 
     fun get(): ArrayList<Ativos> {
         val db = db_.writableDatabase
-        val sql = "SELECT * FROM ${TABLE_ATIVO}"
+        val sql = "SELECT * FROM ${TABLE_ATIVOS}"
         val cursor = db.rawQuery(sql, null)
         val lista = ArrayList<Ativos>()
 
@@ -47,13 +62,13 @@ class AtivosDao(context: Context) {
 
         cursor.close()
         db.close()
-        //Log.v("LOG", "Get ${compras.size}")
+
         return lista
     }
 
-    fun getByProduto(moeda: String): ArrayList<Ativos> {
+    fun getBymoeda(moeda: String): ArrayList<Ativos> {
         val db = db_.writableDatabase
-        val sql = "SELECT * FROM ${TABLE_ATIVO} WHERE ${MOEDA} LIKE '%$moeda%'"
+        val sql = "SELECT * FROM ${TABLE_ATIVOS} WHERE ${MOEDA} LIKE '%$moeda%'"
         val cursor = db.rawQuery(sql ,null)
         val lista = ArrayList<Ativos>()
 
@@ -64,6 +79,7 @@ class AtivosDao(context: Context) {
 
         cursor.close()
         db.close()
+
         return lista
     }
 
