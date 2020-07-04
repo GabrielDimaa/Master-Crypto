@@ -18,11 +18,14 @@ import com.ap8.appcriptomoedas.methods.AtivosMethods
 import com.ap8.appcriptomoedas.ui.AtivosOp
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_bcash.*
+import kotlinx.android.synthetic.main.fragment_ethereum.*
 import kotlinx.android.synthetic.main.fragment_litecoin.*
+import java.text.DecimalFormat
 
 class LitecoinFragment : Fragment() {
 
-    var listaAtivos = mutableListOf<Ativos>()
+    private var listaAtivos = mutableListOf<Ativos>()
+    private var total: Double = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +49,10 @@ class LitecoinFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         updateAdapter()
+        if(listaAtivos.isEmpty()) {
+            ltc_msg.text = "Nenhum ativo adicionado para esta moeda, \n adicione em +"
+        }
+        somar()
     }
 
     private fun updateAdapter() {
@@ -59,6 +66,7 @@ class LitecoinFragment : Fragment() {
             recycle_ltc.visibility = View.VISIBLE
         } else {
             recycle_ltc.visibility = View.VISIBLE
+            ltc_msg.text = ""
         }
         recycle_ltc.adapter = AtivosAdapter(listaAtivos)
         recycle_ltc.adapter?.notifyDataSetChanged()
@@ -70,5 +78,14 @@ class LitecoinFragment : Fragment() {
         recycle.setHasFixedSize(true)
         recycle.adapter = adapter_
         recycle.layoutManager = layout
+    }
+
+    fun somar() {
+        for(position in 0 .. listaAtivos.size - 1) {
+            val ativo = listaAtivos[position]
+            total += ativo.valor
+        }
+        val valor = DecimalFormat("#,##0.00").format(total)
+        total_ltc.text = "R$ ${valor}"
     }
 }

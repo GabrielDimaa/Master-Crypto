@@ -10,7 +10,6 @@
         android:id="@+id/textView2"
         android:layout_width="144dp"
         android:layout_height="70dp"
-        android:layout_marginTop="36dp"
         android:fontFamily="@font/baloo_chettan"
         android:text="@string/ativos"
         android:textAlignment="center"
@@ -18,38 +17,23 @@
         android:textColor="@color/white"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="210dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="84dp"
-        android:background="@drawable/custom_button"
-        android:fontFamily="@font/baloo_chettan"
-        android:text="@string/confirmar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="33dp" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_marginTop="84dp"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp">
 
         <ImageView
-            android:id="@+id/moeda"
+            android:id="@+id/icmoeda"
             android:layout_width="57dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -57,33 +41,35 @@
             app:srcCompat="@drawable/ic_moeda"
             tools:ignore="MissingConstraints" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/view_valor"
+        <TextView
+            android:id="@+id/view_valor_"
             android:layout_width="315dp"
             android:layout_height="45dp"
             android:backgroundTint="@color/white"
             android:fontFamily="@font/roboto"
-            android:hint="@string/valor_investido_em_r"
+            tools:text="@string/valor_investido_em_r"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             tools:ignore="MissingConstraints"
             tools:visibility="visible" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp">
 
         <ImageView
-            android:id="@+id/quatidade"
+            android:id="@+id/icquatidade"
             android:layout_width="57dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -91,35 +77,35 @@
             app:srcCompat="@drawable/ic_quant"
             tools:ignore="MissingConstraints" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/view_quantidade"
+        <TextView
+            android:id="@+id/view_quantidade_"
             android:layout_width="315dp"
             android:layout_height="45dp"
             android:backgroundTint="@color/white"
             android:fontFamily="@font/roboto"
-            android:hint="@string/quantidade_da_moeda"
+            tools:text="@string/quantidade_da_moeda"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             tools:ignore="MissingConstraints"
             tools:visibility="visible" />
 
-
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp">
 
         <ImageView
-            android:id="@+id/data"
+            android:id="@+id/icdata"
             android:layout_width="57dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -127,14 +113,15 @@
             app:srcCompat="@drawable/ic_data"
             tools:ignore="MissingConstraints" />
 
-        <com.vicmikhailau.maskededittext.MaskedEditText
-            android:id="@+id/view_data"
+        <TextView
+            android:id="@+id/view_data_"
             android:layout_width="315dp"
             android:layout_height="45dp"
             android:backgroundTint="@color/white"
             android:fontFamily="@font/roboto"
-            app:mask="##/##/####"
-            android:hint="@string/data"
+            android:gravity="center_vertical"
+            tools:text="DATA"
+            android:textSize="18sp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             tools:ignore="MissingConstraints"
@@ -142,5 +129,53 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp">
+
+        <ImageView
+            android:id="@+id/icvalorizar"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"
+            app:srcCompat="@drawable/ic_valorizar"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/view_valorizacao_"
+            android:layout_width="315dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/roboto"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            tools:text="@string/valoriza_o"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_remove"
+        android:layout_width="210dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/baloo_chettan"
+        android:text="@string/excluir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

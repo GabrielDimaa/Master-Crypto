@@ -28,26 +28,24 @@ class AtivosMethods(context: Context) {
         return msg
     }
 
-    fun update(ativo: Ativos): Boolean {
-        val db = db_.writableDatabase
-        val values = ContentValues()
-        values.put(ID, ativo.id)
-        values.put(MOEDA, ativo.moeda)
-        values.put(QUANTIDADE, ativo.quantidade)
-        values.put(VALOR, ativo.valor)
-        values.put(DATA, ativo.data)
-        db.insertWithOnConflict(TABLE_ATIVOS,null, values, SQLiteDatabase.CONFLICT_REPLACE)
-
-        db.close()
-        return true
-    }
-
-    // fun update
-
-//    fun remove(ativos: Ativos): Int {
+//    fun update(ativo: Ativos): Boolean {
 //        val db = db_.writableDatabase
-//        return db.delete(TABLE_ATIVO, "ID = ?", arrayOf(ativos.id.toString()))
+//        val values = ContentValues()
+//        values.put(ID, ativo.id)
+//        values.put(MOEDA, ativo.moeda)
+//        values.put(QUANTIDADE, ativo.quantidade)
+//        values.put(VALOR, ativo.valor)
+//        values.put(DATA, ativo.data)
+//        db.insertWithOnConflict(TABLE_ATIVOS,null, values, SQLiteDatabase.CONFLICT_REPLACE)
+//
+//        db.close()
+//        return true
 //    }
+
+    fun remove(id: Int): Int {
+        val db = db_.writableDatabase
+        return db.delete(TABLE_ATIVOS, "ID = ?", arrayOf(id.toString()))
+    }
 
     fun get(): ArrayList<Ativos> {
         val db = db_.writableDatabase

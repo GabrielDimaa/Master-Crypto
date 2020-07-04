@@ -14,4 +14,12 @@
     <string name="menu_BHC">Bitcoin Cash</string>
 
     <string name="home_second">Home Second</string>
+    <string name="total_investido">Total Investido</string>
+    <string name="ativos">Ativo</string>
+    <string name="valor_investido_em_r">VALOR INVESTIDO EM R$</string>
+    <string name="quantidade_da_moeda">QUANTIDADE DA MOEDA</string>
+    <string name="data">DATA</string>
+    <string name="confirmar">CONFIRMAR</string>
+    <string name="valoriza_o">VALORIZAÇÃO</string>
+    <string name="excluir">Excluir</string>
 </resources>
