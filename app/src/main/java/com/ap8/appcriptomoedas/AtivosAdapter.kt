@@ -11,7 +11,7 @@ import com.ap8.appcriptomoedas.ui.AtivosOp
 import kotlinx.android.synthetic.main.adapter_ativos.view.*
 import java.text.DecimalFormat
 
-class AtivosAdapter(private val ativos: List<Ativos>):
+class AtivosAdapter(private val ativos: List<Ativos>, private val valorMoedaAtual: Double?):
     RecyclerView.Adapter<AtivosAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AtivosAdapter.VH {
@@ -39,6 +39,7 @@ class AtivosAdapter(private val ativos: List<Ativos>):
 
             val it = Intent(parent.context, AtivosOp::class.java)
             it.putExtra("get/del", ativo)
+            it.putExtra("valorizacao", vHolder.viewValorizacao.text.toString())
             parent.context.startActivity(it)
         })
 
@@ -52,9 +53,13 @@ class AtivosAdapter(private val ativos: List<Ativos>):
     override fun onBindViewHolder(holder: AtivosAdapter.VH, position: Int) {
         val ativo = ativos[position]
         val valor = DecimalFormat("#,##0.00").format(ativo.valor)
+        val valorizacao = calcularValorizacao(ativo.quantidade, ativo.valor)
+        val valorizacao_ = DecimalFormat("#.##").format(valorizacao)
+
         holder.idInvisible = ativo.id
         holder.viewMoeda.text = ativo.moeda.toString()
-        holder.viewQuantidade.text = "${ativo.moeda}   ${ativo.quantidade}"
+        holder.viewQuantidade.text = "${ativo.moeda} ${ativo.quantidade}"
+        holder.viewValorizacao.text = "${valorizacao_}%"
         holder.viewValor.text = "R$ ${valor}"
         holder.viewData.text = ativo.data.toString()
     }
@@ -63,7 +68,15 @@ class AtivosAdapter(private val ativos: List<Ativos>):
         var idInvisible: Int? = null
         var viewMoeda: TextView = item.view_moeda_
         var viewQuantidade: TextView = item.view_quantidade_
+        var viewValorizacao: TextView = item.view_valorizacao_
         var viewValor: TextView = item.view_valor_
         var viewData: TextView = item.view_data_
+    }
+
+    fun calcularValorizacao(valorMoeda: Double, valorReal: Double): Double {
+        val valor = valorMoeda * valorMoedaAtual!!
+        val diferenca = valor - valorReal
+        val resultado = (diferenca * 100) / valorReal
+        return resultado
     }
 }

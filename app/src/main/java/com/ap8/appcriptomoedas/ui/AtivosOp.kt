@@ -16,6 +16,7 @@ class AtivosOp : AppCompatActivity() {
 
         val ativo = intent.getParcelableExtra<Ativos>("get/del")
         val moeda = intent.getStringExtra("moeda")
+        val valorizacao = intent.getStringExtra("valorizacao")
 
         if(moeda != null) {
             setContentView(R.layout.activity_save)
@@ -39,6 +40,7 @@ class AtivosOp : AppCompatActivity() {
             view_quantidade_.text = ativo?.quantidade.toString()
             view_valor_.text = ativo?.valor.toString()
             view_data_.text = ativo?.data.toString()
+            view_valorizacao_.text = valorizacao
 
             btn_remove.setOnClickListener(View.OnClickListener {
                 val dao = AtivosMethods(this)

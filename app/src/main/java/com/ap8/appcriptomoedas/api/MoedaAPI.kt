@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class MoedaAPI (
     @SerializedName("ticker")
-    var ticker: MoedaAPI,
+    var ticker: MoedaAPI?,
 
     @SerializedName("high")
     var high: Double = 0.0, //Maior preço unitário de negociação das últimas 24 horas.
