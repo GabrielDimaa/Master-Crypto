@@ -18,6 +18,7 @@ import com.ap8.appcriptomoedas.methods.AtivosMethods
 import com.ap8.appcriptomoedas.ui.AtivosOp
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_bitcoin.*
+import kotlinx.android.synthetic.main.fragment_litecoin.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,17 +51,22 @@ class BitcoinFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("btc")
-        call.enqueue(object: Callback<MoedaAPI> {
-            override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
-                Log.e("onFailure error", t.message)
-            }
-            override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
-                btcAPI = response.body()?.ticker
-                updateAdapter()
-                somar()
-            }
-        })
+        if(context?.let { RetrofitConfig().hasConnection(it) }!!) {
+            val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("btc")
+            call.enqueue(object: Callback<MoedaAPI> {
+                override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
+                    Log.e("onFailure error", t.message)
+                }
+                override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
+                    btcAPI = response.body()?.ticker
+                    updateAdapter()
+                    somar()
+                }
+            })
+        } else {
+            updateAdapter()
+            somar()
+        }
     }
 
     private fun updateAdapter() {
@@ -76,9 +82,13 @@ class BitcoinFragment : Fragment() {
         } else {
             recycle_btc.visibility = View.VISIBLE
             btc_msg.text = ""
+            if(btcAPI == null) {
+                recycle_btc.adapter = AtivosAdapter(listaAtivos, 0.0)
+            } else {
+                recycle_btc.adapter = AtivosAdapter(listaAtivos.reversed(), btcAPI?.price)
+            }
+            recycle_btc.adapter?.notifyDataSetChanged()
         }
-        recycle_btc.adapter = AtivosAdapter(listaAtivos.reversed(), btcAPI?.price)
-        recycle_btc.adapter?.notifyDataSetChanged()
     }
 
     private fun initRecyclerView(recycle: RecyclerView) {

@@ -16,7 +16,7 @@
         tools:text="R$ 1.000,00"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

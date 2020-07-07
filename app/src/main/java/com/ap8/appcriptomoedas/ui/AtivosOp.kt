@@ -8,6 +8,7 @@ import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
 import kotlinx.android.synthetic.main.activity_save.*
 import kotlinx.android.synthetic.main.activity_visualizar.*
+import java.text.DecimalFormat
 
 class AtivosOp : AppCompatActivity() {
 

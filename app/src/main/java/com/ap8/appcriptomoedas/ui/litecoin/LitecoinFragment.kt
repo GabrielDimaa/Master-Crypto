@@ -56,17 +56,22 @@ class LitecoinFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("ltc")
-        call.enqueue(object: Callback<MoedaAPI> {
-            override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
-                Log.e("onFailure error", t.message)
-            }
-            override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
-                ltcAPI = response.body()?.ticker
-                updateAdapter()
-                somar()
-            }
-        })
+        if(context?.let { RetrofitConfig().hasConnection(it) }!!) {
+            val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("ltc")
+            call.enqueue(object: Callback<MoedaAPI> {
+                override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
+                    Log.e("onFailure error", t.message)
+                }
+                override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
+                    ltcAPI = response.body()?.ticker
+                    updateAdapter()
+                    somar()
+                }
+            })
+        } else {
+            updateAdapter()
+            somar()
+        }
     }
 
     private fun updateAdapter() {
@@ -82,9 +87,13 @@ class LitecoinFragment : Fragment() {
         } else {
             recycle_ltc.visibility = View.VISIBLE
             ltc_msg.text = ""
+            if(ltcAPI == null) {
+                recycle_ltc.adapter = AtivosAdapter(listaAtivos, 0.0)
+            } else {
+                recycle_ltc.adapter = AtivosAdapter(listaAtivos.reversed(), ltcAPI?.price)
+            }
+            recycle_ltc.adapter?.notifyDataSetChanged()
         }
-        recycle_ltc.adapter = AtivosAdapter(listaAtivos.reversed(), ltcAPI?.price)
-        recycle_ltc.adapter?.notifyDataSetChanged()
     }
 
     private fun initRecyclerView(recycle: RecyclerView) {

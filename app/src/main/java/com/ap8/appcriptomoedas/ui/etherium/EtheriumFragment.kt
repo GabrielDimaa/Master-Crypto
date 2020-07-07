@@ -18,6 +18,7 @@ import com.ap8.appcriptomoedas.methods.AtivosMethods
 import com.ap8.appcriptomoedas.ui.AtivosOp
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_ethereum.*
+import kotlinx.android.synthetic.main.fragment_litecoin.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,17 +53,22 @@ class EtheriumFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("eth")
-        call.enqueue(object: Callback<MoedaAPI> {
-            override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
-                Log.e("onFailure error", t.message)
-            }
-            override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
-                etcAPI = response.body()?.ticker
-                updateAdapter()
-                somar()
-            }
-        })
+        if(context?.let { RetrofitConfig().hasConnection(it) }!!) {
+            val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("eth")
+            call.enqueue(object: Callback<MoedaAPI> {
+                override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
+                    Log.e("onFailure error", t.message)
+                }
+                override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
+                    etcAPI = response.body()?.ticker
+                    updateAdapter()
+                    somar()
+                }
+            })
+        } else {
+            updateAdapter()
+            somar()
+        }
     }
 
     private fun updateAdapter() {
@@ -78,9 +84,13 @@ class EtheriumFragment : Fragment() {
         } else {
             recycle_etc.visibility = View.VISIBLE
             etc_msg.text = ""
+            if(etcAPI == null) {
+                recycle_etc.adapter = AtivosAdapter(listaAtivos, 0.0)
+            } else {
+                recycle_etc.adapter = AtivosAdapter(listaAtivos.reversed(), etcAPI?.price)
+            }
+            recycle_etc.adapter?.notifyDataSetChanged()
         }
-        recycle_etc.adapter = AtivosAdapter(listaAtivos.reversed(), etcAPI?.price)
-        recycle_etc.adapter?.notifyDataSetChanged()
     }
 
     private fun initRecyclerView(recycle: RecyclerView) {

@@ -57,17 +57,22 @@ class BcashFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("bch")
-        call.enqueue(object: Callback<MoedaAPI> {
-            override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
-                Log.e("onFailure error", t.message)
-            }
-            override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
-                bchAPI = response.body()?.ticker
-                updateAdapter()
-                somar()
-            }
-        })
+        if(context?.let { RetrofitConfig().hasConnection(it) }!!) {
+            val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("bch")
+            call.enqueue(object: Callback<MoedaAPI> {
+                override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
+                    Log.e("onFailure error", t.message)
+                }
+                override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
+                    bchAPI = response.body()?.ticker
+                    updateAdapter()
+                    somar()
+                }
+            })
+        } else {
+            updateAdapter()
+            somar()
+        }
     }
 
     private fun updateAdapter() {
@@ -83,9 +88,13 @@ class BcashFragment : Fragment() {
         } else {
             recycle_bch.visibility = View.VISIBLE
             bch_msg.text = ""
+            if(bchAPI == null) {
+                recycle_bch.adapter = AtivosAdapter(listaAtivos, 0.0)
+            } else {
+                recycle_bch.adapter = AtivosAdapter(listaAtivos.reversed(), bchAPI?.price)
+            }
+            recycle_bch.adapter?.notifyDataSetChanged()
         }
-        recycle_bch.adapter = AtivosAdapter(listaAtivos.reversed(), bchAPI?.price)
-        recycle_bch.adapter?.notifyDataSetChanged()
     }
 
     private fun initRecyclerView(recycle: RecyclerView) {
