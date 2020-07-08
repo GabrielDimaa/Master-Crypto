@@ -89,6 +89,7 @@ class BcashFragment : Fragment() {
             recycle_bch.visibility = View.GONE
             recycle_bch.visibility = View.VISIBLE
             bch_msg.text = "Nenhum ativo adicionado para esta moeda, \n adicione em +"
+            recycle_bch.adapter = AtivosAdapter(listaAtivos, null)
         } else {
             recycle_bch.visibility = View.VISIBLE
             bch_msg.text = ""

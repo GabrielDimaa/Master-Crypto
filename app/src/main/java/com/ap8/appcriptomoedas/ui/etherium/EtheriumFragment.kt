@@ -86,6 +86,7 @@ class EtheriumFragment : Fragment() {
             recycle_etc.visibility = View.GONE
             recycle_etc.visibility = View.VISIBLE
             etc_msg.text = "Nenhum ativo adicionado para esta moeda, \n adicione em +"
+            recycle_etc.adapter = AtivosAdapter(listaAtivos, null)
         } else {
             recycle_etc.visibility = View.VISIBLE
             etc_msg.text = ""

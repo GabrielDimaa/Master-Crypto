@@ -1,15 +1,18 @@
 package com.ap8.appcriptomoedas.ui.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.ap8.appcriptomoedas.R
 import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
 import kotlinx.android.synthetic.main.fragment_home.*
+import lecho.lib.hellocharts.model.PieChartData
+import lecho.lib.hellocharts.model.SliceValue
+import lecho.lib.hellocharts.view.PieChartView
 import java.text.DecimalFormat
 
 
@@ -28,6 +31,7 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val chartView: PieChartView = root.findViewById(R.id.chart)
 
         return root
     }
@@ -46,11 +50,13 @@ class HomeFragment : Fragment() {
         val totalLTC = somar(listaAtivosLTC)
         val totalBCH = somar(listaAtivosBCH)
 
-        total_home.text = "R$ ${total_}"
-        btc_total.text = "R$ ${totalBTC}"
-        eth_total.text = "R$ ${totalETH}"
-        ltc_total.text = "R$ ${totalLTC}"
-        bch_total.text = "R$ ${totalBCH}"
+        pieChart(totalBTC, totalETH, totalLTC, totalBCH)
+
+        total_home.text = "R$ ${formatar(total_)}"
+        btc_total.text = "R$ ${formatar(totalBTC)}"
+        eth_total.text = "R$ ${formatar(totalETH)}"
+        ltc_total.text = "R$ ${formatar(totalLTC)}"
+        bch_total.text = "R$ ${formatar(totalBCH)}"
     }
 
     fun getListaByMoeda(moeda: String): MutableList<Ativos> {
@@ -70,13 +76,37 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun somar(lista: MutableList<Ativos>): String {
+    fun somar(lista: MutableList<Ativos>): Double {
         total = 0.0
         for(position in 0 .. lista.size - 1) {
             val ativo = lista[position]
             total += ativo.valor
         }
-        val valor = DecimalFormat("#,##0.00").format(total)
+        val valor = total
         return valor
+    }
+
+    fun formatar(valor: Double): String {
+        return DecimalFormat("#,##0.00").format(valor)
+    }
+
+    fun pieChart(
+        totalBTC: Double,
+        totalETH: Double,
+        totalLTC: Double,
+        totalBCH: Double
+    ) {
+        if(totalBTC == 0.0 && totalETH == 0.0 && totalLTC == 0.0 && totalBCH == 0.0) {
+            chart.visibility = View.GONE
+        } else {
+            val pieData: MutableList<SliceValue> = ArrayList()
+            pieData.add(SliceValue(totalBTC.toFloat(), Color.parseColor("#FFFF8600")))
+            pieData.add(SliceValue(totalETH.toFloat(), Color.parseColor("#FF666666")))
+            pieData.add(SliceValue(totalLTC.toFloat(), Color.parseColor("#FF345D9D")))
+            pieData.add(SliceValue(totalBCH.toFloat(), Color.parseColor("#2ECC71")))
+            val pieChartData = PieChartData(pieData)
+            pieChartData.setHasCenterCircle(true)
+            chart.pieChartData = pieChartData
+        }
     }
 }

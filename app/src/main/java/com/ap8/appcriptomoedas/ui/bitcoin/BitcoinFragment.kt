@@ -17,6 +17,7 @@ import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
 import com.ap8.appcriptomoedas.ui.AtivosOp
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_bcash.*
 import kotlinx.android.synthetic.main.fragment_bitcoin.*
 import kotlinx.android.synthetic.main.fragment_litecoin.*
 import retrofit2.Call
@@ -83,6 +84,7 @@ class BitcoinFragment : Fragment() {
             recycle_btc.visibility = View.GONE
             recycle_btc.visibility = View.VISIBLE
             btc_msg.text = "Nenhum ativo adicionado para esta moeda, \n adicione em +"
+            recycle_btc.adapter = AtivosAdapter(listaAtivos, null)
         } else {
             recycle_btc.visibility = View.VISIBLE
             btc_msg.text = ""

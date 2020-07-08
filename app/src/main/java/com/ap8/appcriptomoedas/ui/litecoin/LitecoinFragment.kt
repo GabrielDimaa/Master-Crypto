@@ -88,6 +88,7 @@ class LitecoinFragment : Fragment() {
             recycle_ltc.visibility = View.GONE
             recycle_ltc.visibility = View.VISIBLE
             ltc_msg.text = "Nenhum ativo adicionado para esta moeda, \n adicione em +"
+            recycle_ltc.adapter = AtivosAdapter(listaAtivos, null)
         } else {
             recycle_ltc.visibility = View.VISIBLE
             ltc_msg.text = ""
