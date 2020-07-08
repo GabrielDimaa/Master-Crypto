@@ -22,5 +22,8 @@
     <string name="confirmar">CONFIRMAR</string>
     <string name="valoriza_o">VALORIZAÇÃO</string>
     <string name="excluir">Excluir</string>
+    <string name="litecoin">LITECOIN</string>
+    <string name="ethereum">ETHEREUM</string>
+    <string name="bcash">BCASH</string>
     <string name="bitcoin">BITCOIN</string>
 </resources>

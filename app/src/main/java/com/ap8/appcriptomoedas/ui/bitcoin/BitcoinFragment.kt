@@ -52,17 +52,21 @@ class BitcoinFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         if(context?.let { RetrofitConfig().hasConnection(it) }!!) {
+            progressbtc.visibility = View.VISIBLE
             val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("btc")
-            call.enqueue(object: Callback<MoedaAPI> {
-                override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
-                    Log.e("onFailure error", t.message)
-                }
-                override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
-                    btcAPI = response.body()?.ticker
-                    updateAdapter()
-                    somar()
-                }
-            })
+                call.enqueue(object: Callback<MoedaAPI> {
+                    override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
+                        Log.e("onFailure error", t.message)
+                        progressbtc.visibility = View.GONE
+                    }
+                    override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
+                        progressbtc.visibility = View.VISIBLE
+                        btcAPI = response.body()?.ticker
+                        updateAdapter()
+                        somar()
+                        progressbtc.visibility = View.GONE
+                    }
+                })
         } else {
             updateAdapter()
             somar()
@@ -83,7 +87,7 @@ class BitcoinFragment : Fragment() {
             recycle_btc.visibility = View.VISIBLE
             btc_msg.text = ""
             if(btcAPI == null) {
-                recycle_btc.adapter = AtivosAdapter(listaAtivos, 0.0)
+                recycle_btc.adapter = AtivosAdapter(listaAtivos, null)
             } else {
                 recycle_btc.adapter = AtivosAdapter(listaAtivos.reversed(), btcAPI?.price)
             }
@@ -107,5 +111,11 @@ class BitcoinFragment : Fragment() {
         }
         val valor = DecimalFormat("#,##0.00").format(total)
         total_btc.text = "R$ ${valor}"
+    }
+
+    fun show(show: Boolean){
+        if (!show){
+            progressbtc.visibility = if(show) View.VISIBLE else View.GONE
+        }
     }
 }

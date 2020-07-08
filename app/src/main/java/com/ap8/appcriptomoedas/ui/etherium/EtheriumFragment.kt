@@ -17,6 +17,7 @@ import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
 import com.ap8.appcriptomoedas.ui.AtivosOp
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_bitcoin.*
 import kotlinx.android.synthetic.main.fragment_ethereum.*
 import kotlinx.android.synthetic.main.fragment_litecoin.*
 import retrofit2.Call
@@ -42,7 +43,7 @@ class EtheriumFragment : Fragment() {
 
         btn.setOnClickListener(View.OnClickListener {
             val it = Intent(activity, AtivosOp::class.java)
-            it.putExtra("moeda", "ETC")
+            it.putExtra("moeda", "ETH")
             activity?.startActivity(it)
         })
 
@@ -54,15 +55,19 @@ class EtheriumFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         if(context?.let { RetrofitConfig().hasConnection(it) }!!) {
+            progresseth.visibility = View.VISIBLE
             val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("eth")
             call.enqueue(object: Callback<MoedaAPI> {
                 override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
                     Log.e("onFailure error", t.message)
+                    progresseth.visibility = View.GONE
                 }
                 override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
+                    progresseth.visibility = View.VISIBLE
                     etcAPI = response.body()?.ticker
                     updateAdapter()
                     somar()
+                    progresseth.visibility = View.GONE
                 }
             })
         } else {
@@ -75,7 +80,7 @@ class EtheriumFragment : Fragment() {
         val methods = activity?.let { AtivosMethods(it) }
         listaAtivos.clear()
         if (methods != null) {
-            listaAtivos = methods.getBymoeda("ETC")
+            listaAtivos = methods.getBymoeda("ETH")
         }
         if(listaAtivos.isEmpty()) {
             recycle_etc.visibility = View.GONE
@@ -85,7 +90,7 @@ class EtheriumFragment : Fragment() {
             recycle_etc.visibility = View.VISIBLE
             etc_msg.text = ""
             if(etcAPI == null) {
-                recycle_etc.adapter = AtivosAdapter(listaAtivos, 0.0)
+                recycle_etc.adapter = AtivosAdapter(listaAtivos, null)
             } else {
                 recycle_etc.adapter = AtivosAdapter(listaAtivos.reversed(), etcAPI?.price)
             }

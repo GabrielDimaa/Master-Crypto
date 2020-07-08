@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/pink</item>
     </style>
 
+    <style name="AppTheme.splash">
+        <item name="colorPrimary">@color/space</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

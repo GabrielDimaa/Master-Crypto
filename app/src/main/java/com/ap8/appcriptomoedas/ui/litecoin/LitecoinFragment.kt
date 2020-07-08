@@ -57,15 +57,19 @@ class LitecoinFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         if(context?.let { RetrofitConfig().hasConnection(it) }!!) {
+            progressltc.visibility = View.VISIBLE
             val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("ltc")
             call.enqueue(object: Callback<MoedaAPI> {
                 override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
                     Log.e("onFailure error", t.message)
+                    progressltc.visibility = View.GONE
                 }
                 override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
+                    progressltc.visibility = View.VISIBLE
                     ltcAPI = response.body()?.ticker
                     updateAdapter()
                     somar()
+                    progressltc.visibility = View.GONE
                 }
             })
         } else {
@@ -88,7 +92,7 @@ class LitecoinFragment : Fragment() {
             recycle_ltc.visibility = View.VISIBLE
             ltc_msg.text = ""
             if(ltcAPI == null) {
-                recycle_ltc.adapter = AtivosAdapter(listaAtivos, 0.0)
+                recycle_ltc.adapter = AtivosAdapter(listaAtivos, null)
             } else {
                 recycle_ltc.adapter = AtivosAdapter(listaAtivos.reversed(), ltcAPI?.price)
             }

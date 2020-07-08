@@ -58,15 +58,19 @@ class BcashFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         if(context?.let { RetrofitConfig().hasConnection(it) }!!) {
+            progressbch.visibility = View.VISIBLE
             val call: Call<MoedaAPI> = RetrofitConfig().getMoedaService().getMoeda("bch")
             call.enqueue(object: Callback<MoedaAPI> {
                 override fun onFailure(call: Call<MoedaAPI>, t: Throwable) {
                     Log.e("onFailure error", t.message)
+                    progressbch.visibility = View.GONE
                 }
                 override fun onResponse(call: Call<MoedaAPI>, response: Response<MoedaAPI>) {
+                    progressbch.visibility = View.VISIBLE
                     bchAPI = response.body()?.ticker
                     updateAdapter()
                     somar()
+                    progressbch.visibility = View.GONE
                 }
             })
         } else {
@@ -89,7 +93,7 @@ class BcashFragment : Fragment() {
             recycle_bch.visibility = View.VISIBLE
             bch_msg.text = ""
             if(bchAPI == null) {
-                recycle_bch.adapter = AtivosAdapter(listaAtivos, 0.0)
+                recycle_bch.adapter = AtivosAdapter(listaAtivos, null)
             } else {
                 recycle_bch.adapter = AtivosAdapter(listaAtivos.reversed(), bchAPI?.price)
             }

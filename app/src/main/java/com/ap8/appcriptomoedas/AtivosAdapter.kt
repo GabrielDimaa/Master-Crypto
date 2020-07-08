@@ -52,14 +52,22 @@ class AtivosAdapter(private val ativos: List<Ativos>, private val valorMoedaAtua
 
     override fun onBindViewHolder(holder: AtivosAdapter.VH, position: Int) {
         val ativo = ativos[position]
+        val valorizacao: Double?
+        var valorizacao_: String?
         val valor = DecimalFormat("#,##0.00").format(ativo.valor)
-        val valorizacao = calcularValorizacao(ativo.quantidade, ativo.valor)
-        val valorizacao_ = DecimalFormat("#.##").format(valorizacao)
+
+        if(valorMoedaAtual != null) {
+            valorizacao = calcularValorizacao(ativo.quantidade, ativo.valor)
+            valorizacao_ = DecimalFormat("#.##").format(valorizacao)
+            valorizacao_ = "${valorizacao_}%"
+        } else {
+            valorizacao_ = "0%"
+        }
 
         holder.idInvisible = ativo.id
         holder.viewMoeda.text = ativo.moeda.toString()
         holder.viewQuantidade.text = "${ativo.moeda} ${ativo.quantidade}"
-        holder.viewValorizacao.text = "${valorizacao_}%"
+        holder.viewValorizacao.text = valorizacao_
         holder.viewValor.text = "R$ ${valor}"
         holder.viewData.text = ativo.data.toString()
     }
