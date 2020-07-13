@@ -1,149 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/space">
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="144dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/baloo_chettan"
-        android:text="@string/ativos"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/white"
-        android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="210dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="84dp"
-        android:background="@drawable/custom_button"
-        android:fontFamily="@font/baloo_chettan"
-        android:text="@string/confirmar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-        tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginTop="84dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        android:layout_height="match_parent"
+        android:background="@color/space">
 
-        <ImageView
-            android:id="@+id/moeda"
-            android:layout_width="57dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="5dp"
-            app:srcCompat="@drawable/ic_moeda"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="144dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="36dp"
+            android:fontFamily="@font/baloo_chettan"
+            android:text="@string/ativos"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/white"
+            android:textSize="45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/view_valor"
-            android:layout_width="315dp"
-            android:layout_height="45dp"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/roboto"
-            android:inputType="numberDecimal"
-            android:hint="@string/valor_investido_em_r"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            tools:ignore="MissingConstraints"
-            tools:visibility="visible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:id="@+id/quatidade"
-            android:layout_width="57dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="5dp"
-            app:srcCompat="@drawable/ic_quant"
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="210dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="84dp"
+            android:background="@drawable/custom_button"
+            android:fontFamily="@font/baloo_chettan"
+            android:text="@string/confirmar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearcalendar"
             tools:ignore="MissingConstraints" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/view_quantidade"
-            android:layout_width="315dp"
-            android:layout_height="45dp"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/roboto"
-            android:inputType="numberDecimal"
-            android:hint="@string/quantidade_da_moeda"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            tools:ignore="MissingConstraints"
-            tools:visibility="visible" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="84dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
 
+            <ImageView
+                android:id="@+id/moeda"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/ic_moeda"
+                tools:ignore="MissingConstraints" />
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/view_valor"
+                android:layout_width="315dp"
+                android:layout_height="45dp"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/roboto"
+                android:inputType="numberDecimal"
+                android:hint="@string/valor_investido_em_r"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                tools:ignore="MissingConstraints"
+                tools:visibility="visible" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/data"
-            android:layout_width="57dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="5dp"
-            app:srcCompat="@drawable/ic_data"
-            tools:ignore="MissingConstraints" />
+            <ImageView
+                android:id="@+id/quatidade"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/ic_quant"
+                tools:ignore="MissingConstraints" />
 
-        <com.vicmikhailau.maskededittext.MaskedEditText
-            android:id="@+id/view_data"
-            android:layout_width="315dp"
-            android:layout_height="45dp"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/roboto"
-            android:inputType="numberDecimal"
-            app:mask="##/##/####"
-            android:hint="@string/data"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            tools:ignore="MissingConstraints"
-            tools:visibility="visible" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/view_quantidade"
+                android:layout_width="315dp"
+                android:layout_height="45dp"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/roboto"
+                android:inputType="numberDecimal"
+                android:hint="@string/quantidade_da_moeda"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                tools:ignore="MissingConstraints"
+                tools:visibility="visible" />
 
-    </LinearLayout>
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearcalendar"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:background="@drawable/efeito_click"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            tools:ignore="MissingConstraints">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/data"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/ic_data"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/view_data"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/roboto"
+                android:hint="@string/data"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                tools:ignore="MissingConstraints"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <CalendarView-->
+<!--            android:id="@+id/calendarView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:background="@color/white"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    </FrameLayout>-->
+
+</FrameLayout>

@@ -1,15 +1,21 @@
 package com.ap8.appcriptomoedas.ui
 
+import android.app.DatePickerDialog
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
+import android.widget.CalendarView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.ap8.appcriptomoedas.R
 import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
-import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.android.synthetic.main.activity_save.*
 import kotlinx.android.synthetic.main.activity_visualizar.*
 import java.text.DecimalFormat
+import java.util.*
+
 
 class AtivosOp : AppCompatActivity() {
 
@@ -22,6 +28,18 @@ class AtivosOp : AppCompatActivity() {
 
         if(moeda != null) {
             setContentView(R.layout.activity_save)
+
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val openCalender = findViewById<LinearLayout>(R.id.linearcalendar)
+            openCalender.setOnClickListener(View.OnClickListener {
+                val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year_, month_, day_ ->
+                    view_data.text = "${day_}/${month_+1}/${year_}"
+                }, year, month, day)
+                dpd.show()
+            })
 
             btn_save.setOnClickListener(View.OnClickListener {
                 val ativo = Ativos(
