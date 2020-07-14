@@ -1,8 +1,6 @@
 package com.ap8.appcriptomoedas
 
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,11 +10,6 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.ap8.appcriptomoedas.api.MoedaAPI
-import com.ap8.appcriptomoedas.api.RetrofitConfig
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 

@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/space"
         android:paddingBottom="60dp"
         tools:context=".ui.home.HomeFragment">
@@ -59,7 +59,7 @@
             android:layout_height="85dp"
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="8dp"
-            android:background="#59595454"
+            android:background="@drawable/efeito_click_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText1"
@@ -108,7 +108,7 @@
             android:layout_height="85dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
-            android:background="#59595454"
+            android:background="@drawable/efeito_click_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.562"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,7 @@
             tools:ignore="MissingConstraints">
 
             <ImageView
-                android:id="@+id/imageeth"
+                android:id="@+id/imagebhc"
                 android:layout_width="41dp"
                 android:layout_height="31dp"
                 android:layout_marginTop="5dp"
@@ -135,7 +135,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.481"
-                app:layout_constraintStart_toEndOf="@+id/imageeth"
+                app:layout_constraintStart_toEndOf="@+id/imagebhc"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.242" />
 
@@ -149,25 +149,25 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageeth" />
+                app:layout_constraintTop_toBottomOf="@+id/imagebhc" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutBhc"
+            android:id="@+id/constraintLayoutLtc"
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
-            android:background="#59595454"
+            android:background="@drawable/efeito_click_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText3"
             tools:ignore="DuplicateIds,MissingConstraints">
 
             <ImageView
-                android:id="@+id/imagebhc"
+                android:id="@+id/imageltc"
                 android:layout_width="41dp"
                 android:layout_height="31dp"
                 android:layout_marginTop="5dp"
@@ -186,7 +186,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.417"
-                app:layout_constraintStart_toEndOf="@+id/imagebhc"
+                app:layout_constraintStart_toEndOf="@+id/imageltc"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.242" />
 
@@ -200,7 +200,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagebhc" />
+                app:layout_constraintTop_toBottomOf="@+id/imageltc" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -229,7 +229,7 @@
             android:gravity="start|top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayoutBhc"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayoutLtc"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -243,23 +243,23 @@
             android:gravity="start|top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutLtc"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutEth"
             tools:ignore="MissingConstraints" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutLtc"
+            android:id="@+id/constraintLayoutEth"
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="8dp"
-            android:background="#59595454"
+            android:background="@drawable/efeito_click_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText4"
             tools:ignore="MissingConstraints">
 
             <ImageView
-                android:id="@+id/imageltc"
+                android:id="@+id/imageeth"
                 android:layout_width="41dp"
                 android:layout_height="31dp"
                 android:layout_marginTop="5dp"
@@ -278,7 +278,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.403"
-                app:layout_constraintStart_toEndOf="@+id/imageltc"
+                app:layout_constraintStart_toEndOf="@+id/imageeth"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.242" />
 
@@ -292,7 +292,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageltc" />
+                app:layout_constraintTop_toBottomOf="@+id/imageeth" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

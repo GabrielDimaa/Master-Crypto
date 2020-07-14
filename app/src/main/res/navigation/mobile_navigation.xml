@@ -10,6 +10,18 @@
         android:name="com.ap8.appcriptomoedas.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_btc"
+            app:destination="@id/nav_btc" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_eth"
+            app:destination="@id/nav_eth" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_ltc"
+            app:destination="@id/nav_ltc" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_bhc"
+            app:destination="@id/nav_bhc" />
     </fragment>
 
     <fragment
@@ -35,4 +47,5 @@
         android:name="com.ap8.appcriptomoedas.ui.bcash.BcashFragment"
         android:label="@string/menu_BHC"
         tools:layout="@layout/fragment_bcash" />
+
 </navigation>

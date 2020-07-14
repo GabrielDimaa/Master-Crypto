@@ -5,7 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.ap8.appcriptomoedas.R
 import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
@@ -31,7 +37,15 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val chartView: PieChartView = root.findViewById(R.id.chart)
+        val btnBTC = root.findViewById<ConstraintLayout>(R.id.constraintLayoutBtc)
+        val btnETH = root.findViewById<ConstraintLayout>(R.id.constraintLayoutEth)
+        val btnLTC = root.findViewById<ConstraintLayout>(R.id.constraintLayoutLtc)
+        val btnBCH = root.findViewById<ConstraintLayout>(R.id.constraintLayoutBhc)
+
+        btnBTC.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_home_to_nav_btc, null))
+        btnETH.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_home_to_nav_eth, null))
+        btnLTC.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_home_to_nav_ltc, null))
+        btnBCH.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_home_to_nav_bhc, null))
 
         return root
     }
