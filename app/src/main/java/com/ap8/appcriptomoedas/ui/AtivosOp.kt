@@ -1,13 +1,13 @@
 package com.ap8.appcriptomoedas.ui
 
 import android.app.DatePickerDialog
-import android.opengl.Visibility
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
-import android.widget.CalendarView
+import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.ap8.appcriptomoedas.R
 import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
@@ -23,11 +23,40 @@ class AtivosOp : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val ativo = intent.getParcelableExtra<Ativos>("get/del")
-        val moeda = intent.getStringExtra("moeda")
         val valorizacao = intent.getStringExtra("valorizacao")
+        val moeda = intent.getStringExtra("moeda")
+        val price = intent.getDoubleExtra("price", 0.0)
 
         if(moeda != null) {
             setContentView(R.layout.activity_save)
+
+            val valor = findViewById<EditText>(R.id.view_valor)
+            valor.addTextChangedListener(object : TextWatcher {
+                override fun onTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    aft: Int
+                ) {
+                }
+
+                override fun afterTextChanged(s: Editable) {
+                    val valor_ = view_valor.text.toString().toDouble()
+                    val quantidade = valor_ / price
+                    val formatado = DecimalFormat("#.#####")
+                        .format(quantidade)
+                        .replace(",", ".")
+                    view_quantidade.setText(formatado)
+                }
+            })
 
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)

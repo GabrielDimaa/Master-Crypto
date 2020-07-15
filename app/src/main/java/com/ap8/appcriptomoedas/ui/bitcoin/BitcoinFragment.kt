@@ -42,6 +42,7 @@ class BitcoinFragment : Fragment() {
         btn.setOnClickListener(View.OnClickListener {
             val it = Intent(activity, AtivosOp::class.java)
             it.putExtra("moeda", "BTC")
+            it.putExtra("price", btcAPI?.price)
             activity?.startActivity(it)
         })
 

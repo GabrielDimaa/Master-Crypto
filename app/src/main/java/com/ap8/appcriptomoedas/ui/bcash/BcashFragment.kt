@@ -48,6 +48,7 @@ class BcashFragment : Fragment() {
         btn.setOnClickListener(View.OnClickListener {
             val it = Intent(activity, AtivosOp::class.java)
             it.putExtra("moeda", "BCH")
+            it.putExtra("price", bchAPI?.price)
             activity?.startActivity(it)
         })
         initRecyclerView(recycle)

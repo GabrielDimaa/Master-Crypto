@@ -44,6 +44,7 @@ class EtheriumFragment : Fragment() {
         btn.setOnClickListener(View.OnClickListener {
             val it = Intent(activity, AtivosOp::class.java)
             it.putExtra("moeda", "ETH")
+            it.putExtra("price", etcAPI?.price)
             activity?.startActivity(it)
         })
 

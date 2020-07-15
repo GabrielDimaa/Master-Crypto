@@ -47,6 +47,7 @@ class LitecoinFragment : Fragment() {
         btn.setOnClickListener(View.OnClickListener {
             val it = Intent(activity, AtivosOp::class.java)
             it.putExtra("moeda", "LTC")
+            it.putExtra("price", ltcAPI?.price)
             activity?.startActivity(it)
         })
 

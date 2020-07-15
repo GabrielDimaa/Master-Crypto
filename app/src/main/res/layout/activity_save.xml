@@ -50,6 +50,7 @@
             android:orientation="horizontal"
             android:paddingHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
@@ -68,8 +69,8 @@
                 android:layout_height="45dp"
                 android:backgroundTint="@color/white"
                 android:fontFamily="@font/roboto"
-                android:inputType="numberDecimal"
                 android:hint="@string/valor_investido_em_r"
+                android:inputType="numberDecimal"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 tools:ignore="MissingConstraints"
