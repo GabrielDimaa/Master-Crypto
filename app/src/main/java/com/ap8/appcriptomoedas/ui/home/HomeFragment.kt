@@ -20,6 +20,8 @@ import lecho.lib.hellocharts.model.PieChartData
 import lecho.lib.hellocharts.model.SliceValue
 import lecho.lib.hellocharts.view.PieChartView
 import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -101,6 +103,7 @@ class HomeFragment : Fragment() {
     }
 
     fun formatar(valor: Double): String {
+        Locale.setDefault(Locale("pt", "BR"))
         return DecimalFormat("#,##0.00").format(valor)
     }
 

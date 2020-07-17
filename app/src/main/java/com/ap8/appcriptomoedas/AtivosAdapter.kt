@@ -10,6 +10,7 @@ import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.ui.AtivosOp
 import kotlinx.android.synthetic.main.adapter_ativos.view.*
 import java.text.DecimalFormat
+import java.util.*
 
 class AtivosAdapter(private val ativos: List<Ativos>, private val valorMoedaAtual: Double?):
     RecyclerView.Adapter<AtivosAdapter.VH>() {
@@ -54,6 +55,7 @@ class AtivosAdapter(private val ativos: List<Ativos>, private val valorMoedaAtua
         val ativo = ativos[position]
         val valorizacao: Double?
         var valorizacao_: String?
+        Locale.setDefault(Locale("pt", "BR"))
         val valor = DecimalFormat("#,##0.00").format(ativo.valor)
 
         if(valorMoedaAtual != null) {

@@ -26,4 +26,10 @@
     <string name="ethereum">ETHEREUM</string>
     <string name="bcash">BCASH</string>
     <string name="bitcoin">BITCOIN</string>
+    <string name="negocia_es">Negociações</string>
+    <string name="resumo_de_informa_es_das_ltimas_24h">Resumo de informações das últimas 24h</string>
+    <string name="ltimo_pre_o">Último preço:</string>
+    <string name="maior_valor">Maior valor:</string>
+    <string name="menor_valor">Menor valor:</string>
+    <string name="negociados">Negociados:</string>
 </resources>

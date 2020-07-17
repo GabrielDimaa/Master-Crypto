@@ -30,33 +30,35 @@ class AtivosOp : AppCompatActivity() {
         if(moeda != null) {
             setContentView(R.layout.activity_save)
 
-            val valor = findViewById<EditText>(R.id.view_valor)
-            valor.addTextChangedListener(object : TextWatcher {
-                override fun onTextChanged(
-                    s: CharSequence,
-                    start: Int,
-                    before: Int,
-                    count: Int
-                ) {
-                }
+            if (price != 0.0) {
+                val valor = findViewById<EditText>(R.id.view_valor)
+                valor.addTextChangedListener(object : TextWatcher {
+                    override fun onTextChanged(
+                        s: CharSequence,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence,
-                    start: Int,
-                    count: Int,
-                    aft: Int
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence,
+                        start: Int,
+                        count: Int,
+                        aft: Int
+                    ) {
+                    }
 
-                override fun afterTextChanged(s: Editable) {
-                    val valor_ = view_valor.text.toString().toDouble()
-                    val quantidade = valor_ / price
-                    val formatado = DecimalFormat("#.#####")
-                        .format(quantidade)
-                        .replace(",", ".")
-                    view_quantidade.setText(formatado)
-                }
-            })
+                    override fun afterTextChanged(s: Editable) {
+                        val valor_ = view_valor.text.toString().toDouble()
+                        val quantidade = valor_ / price
+                        val formatado = DecimalFormat("#.#####")
+                            .format(quantidade)
+                            .replace(",", ".")
+                        view_quantidade.setText(formatado)
+                    }
+                })
+            }
 
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -64,7 +66,7 @@ class AtivosOp : AppCompatActivity() {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
             val openCalender = findViewById<LinearLayout>(R.id.linearcalendar)
             openCalender.setOnClickListener(View.OnClickListener {
-                val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year_, month_, day_ ->
+                val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, year_, month_, day_ ->
                     view_data.text = "${day_}/${month_+1}/${year_}"
                 }, year, month, day)
                 dpd.show()

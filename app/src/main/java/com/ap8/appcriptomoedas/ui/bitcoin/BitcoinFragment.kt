@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +17,11 @@ import com.ap8.appcriptomoedas.api.RetrofitConfig
 import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
 import com.ap8.appcriptomoedas.ui.AtivosOp
+import com.ap8.appcriptomoedas.ui.Resumo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_bcash.*
 import kotlinx.android.synthetic.main.fragment_bitcoin.*
+import kotlinx.android.synthetic.main.fragment_ethereum.*
 import kotlinx.android.synthetic.main.fragment_litecoin.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,14 +39,29 @@ class BitcoinFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_bitcoin, container, false)
-        val btn: FloatingActionButton = root.findViewById(R.id.buttonFloating)
+        val btnAdd: FloatingActionButton = root.findViewById(R.id.buttonFloating)
+        val btnResumo: FloatingActionButton = root.findViewById(R.id.buttonFloating2)
         val recycle: RecyclerView = root.findViewById(R.id.recycle_btc)
 
-        btn.setOnClickListener(View.OnClickListener {
+        btnAdd.setOnClickListener(View.OnClickListener {
             val it = Intent(activity, AtivosOp::class.java)
             it.putExtra("moeda", "BTC")
             it.putExtra("price", btcAPI?.price)
             activity?.startActivity(it)
+        })
+
+        btnResumo.setOnClickListener(View.OnClickListener {
+            if (btcAPI == null) {
+                Toast.makeText(activity, "Sem Conexão!", Toast.LENGTH_SHORT).show()
+            } else {
+                val it = Intent(activity, Resumo::class.java)
+                it.putExtra("moeda", "BTC")
+                it.putExtra("preco", btcAPI?.price)
+                it.putExtra("maior", btcAPI?.high)
+                it.putExtra("menor", btcAPI?.low)
+                it.putExtra("volume", btcAPI?.vol)
+                activity?.startActivity(it)
+            }
         })
 
         initRecyclerView(recycle)
@@ -72,6 +90,7 @@ class BitcoinFragment : Fragment() {
         } else {
             updateAdapter()
             somar()
+            progressbtc.visibility = View.GONE
         }
     }
 

@@ -59,6 +59,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonFloating2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#666666"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonFloating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_resumo" />
+
     <TextView
         android:id="@+id/etc_msg"
         android:layout_width="wrap_content"

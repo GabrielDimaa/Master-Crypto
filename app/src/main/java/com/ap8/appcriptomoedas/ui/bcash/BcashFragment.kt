@@ -6,25 +6,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ap8.appcriptomoedas.AtivosAdapter
-import com.ap8.appcriptomoedas.MainActivity
 import com.ap8.appcriptomoedas.R
 import com.ap8.appcriptomoedas.api.MoedaAPI
 import com.ap8.appcriptomoedas.api.RetrofitConfig
 import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
 import com.ap8.appcriptomoedas.ui.AtivosOp
+import com.ap8.appcriptomoedas.ui.Resumo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_bcash.*
-import kotlinx.android.synthetic.main.fragment_bitcoin.*
-import kotlinx.android.synthetic.main.fragment_ethereum.*
-import kotlinx.android.synthetic.main.fragment_litecoin.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,15 +37,31 @@ class BcashFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_bcash, container, false)
-        val btn: FloatingActionButton = root.findViewById(R.id.buttonFloating)
+        val btnAdd: FloatingActionButton = root.findViewById(R.id.buttonFloating)
+        val btnResumo: FloatingActionButton = root.findViewById(R.id.buttonFloating2)
         val recycle: RecyclerView = root.findViewById(R.id.recycle_bch)
 
-        btn.setOnClickListener(View.OnClickListener {
+        btnAdd.setOnClickListener(View.OnClickListener {
             val it = Intent(activity, AtivosOp::class.java)
             it.putExtra("moeda", "BCH")
             it.putExtra("price", bchAPI?.price)
             activity?.startActivity(it)
         })
+
+        btnResumo.setOnClickListener(View.OnClickListener {
+            if (bchAPI == null) {
+                Toast.makeText(activity, "Sem Conexão!", Toast.LENGTH_SHORT).show()
+            } else {
+                val it = Intent(activity, Resumo::class.java)
+                it.putExtra("moeda", "BCH")
+                it.putExtra("preco", bchAPI?.price)
+                it.putExtra("maior", bchAPI?.high)
+                it.putExtra("menor", bchAPI?.low)
+                it.putExtra("volume", bchAPI?.vol)
+                activity?.startActivity(it)
+            }
+        })
+
         initRecyclerView(recycle)
 
         return root
@@ -77,7 +88,7 @@ class BcashFragment : Fragment() {
         } else {
             updateAdapter()
             somar()
-        }
+            progressbch.visibility = View.GONE        }
     }
 
     private fun updateAdapter() {

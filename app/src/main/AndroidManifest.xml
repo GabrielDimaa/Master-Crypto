@@ -27,6 +27,10 @@
             android:name=".ui.AtivosOp"
             android:label="Adicionar Ativo"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.Resumo"
+            android:label="Negociações"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

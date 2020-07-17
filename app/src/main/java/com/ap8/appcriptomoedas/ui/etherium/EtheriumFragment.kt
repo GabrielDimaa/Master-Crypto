@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.ap8.appcriptomoedas.api.RetrofitConfig
 import com.ap8.appcriptomoedas.methods.Ativos
 import com.ap8.appcriptomoedas.methods.AtivosMethods
 import com.ap8.appcriptomoedas.ui.AtivosOp
+import com.ap8.appcriptomoedas.ui.Resumo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_bitcoin.*
 import kotlinx.android.synthetic.main.fragment_ethereum.*
@@ -38,14 +40,29 @@ class EtheriumFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_ethereum, container, false)
-        val btn: FloatingActionButton = root.findViewById(R.id.buttonFloating)
+        val btnAdd: FloatingActionButton = root.findViewById(R.id.buttonFloating)
+        val btnResumo: FloatingActionButton = root.findViewById(R.id.buttonFloating2)
         val recycle: RecyclerView = root.findViewById(R.id.recycle_etc)
 
-        btn.setOnClickListener(View.OnClickListener {
+        btnAdd.setOnClickListener(View.OnClickListener {
             val it = Intent(activity, AtivosOp::class.java)
             it.putExtra("moeda", "ETH")
             it.putExtra("price", etcAPI?.price)
             activity?.startActivity(it)
+        })
+
+        btnResumo.setOnClickListener(View.OnClickListener {
+            if (etcAPI == null) {
+                Toast.makeText(activity, "Sem Conexão!", Toast.LENGTH_SHORT).show()
+            } else {
+                val it = Intent(activity, Resumo::class.java)
+                it.putExtra("moeda", "ETH")
+                it.putExtra("preco", etcAPI?.price)
+                it.putExtra("maior", etcAPI?.high)
+                it.putExtra("menor", etcAPI?.low)
+                it.putExtra("volume", etcAPI?.vol)
+                activity?.startActivity(it)
+            }
         })
 
         initRecyclerView(recycle)
@@ -74,6 +91,7 @@ class EtheriumFragment : Fragment() {
         } else {
             updateAdapter()
             somar()
+            progresseth.visibility = View.GONE
         }
     }
 
