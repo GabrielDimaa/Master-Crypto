@@ -1,7 +1,7 @@
 <h1 align="center"> Master Crypto </h1>
 
 ## Descrição do Projeto
-<p align="justify"> Master Crypto é uma aplicativo desenvolvido em Kotlin, com o intuito de registrar as compras de ativos em criptomoedas. </p>
+<p align="justify"> Master Crypto é um aplicativo desenvolvido em Kotlin, com o intuito de registrar as compras de ativos em criptomoedas. </p>
 
 <div>
 <img src="https://github.com/GabrielDimaa/Master-Crypto/blob/master/Screenshot_20200717-130903.png" width="240px" height="500px"/>
